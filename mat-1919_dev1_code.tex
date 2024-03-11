@@ -1,0 +1,920 @@
+\documentclass[12pt]{article}
+
+\usepackage[canadien]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[top=25mm, bottom=25mm, left=25mm, right=25mm]{geometry}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epigraph}
+\usepackage{subfig}
+\usepackage{framed}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{tikz} %pour les diagrammes de Venn
+\usepackage[T1]{fontenc}
+\usetikzlibrary{matrix}
+
+
+\pagestyle{fancy}
+
+\rhead{Équipe \# 02} 		 % <=== Indiquez votre numéro d'équipe (le même que sur MonPortail)
+\lhead{Maxime Provost, Jérémie Bernard, Ramatoulaye Sidy Cherif Barry}  % <=== Indiquez les noms de tous les co-équipiers
+\chead{}
+
+
+
+%%% Couleurs du texte %%%
+\newcommand{\rouge}[1]{\textcolor{red}{#1}}
+\newcommand{\bleu}[1]{\textcolor{blue}{#1}}
+\newcommand{\blanc}[1]{\textcolor{white}{#1}}
+
+%%% Valeurs booléennes %%%
+\newcommand{\vrai}{\mbox{\tt vrai}}
+\newcommand{\faux}{\mbox{\tt faux}}
+\newcommand{\V}{\mbox{\tt v}}
+\newcommand{\F}{\mbox{\tt f}}
+
+%%% Opérateur booléens %%%
+\newcommand{\non}{\neg}                  % Opérareur de négation
+\newcommand{\et}{\wedge}                 % Opérareur de conjonction
+\newcommand{\ou}{\vee}                   % Opérareur de disjonction
+\newcommand{\ouexclusif}{\veebar}        % Opérareur de ou exclusif
+\newcommand{\implique}{\Rightarrow}      % Opérareur d'implication
+\newcommand{\impliqueinv}{\Leftarrow}    % Opérareur d'implication inverse
+\newcommand{\ssi}{\Leftrightarrow}       % Opérareur si et seulement si
+
+%%% Opérateurs ensemblistes %%%
+\newcommand{\dans}{\in}                  % Opérateur d'appartenance
+\newcommand{\inclus}{\subseteq}          % Opérareur d'inclusion
+\newcommand{\strictinclus}{\subset}      % Opérareur d'inclusion stricte
+\newcommand{\inclusinv}{\supseteq}       % Opérareur d'inclusion inverse
+\newcommand{\strictinclusinv}{\supset}   % Opérareur d'inclusion stricte inverse
+
+\newcommand{\nondans}{\notin}              % Négation de l'opérateur d'appartenance
+\newcommand{\noninclus}{\not\subseteq}     % Opérareur d'inclusion
+\newcommand{\nonstrictinclus}{\not\subset} % Opérareur d'inclusion stricte
+
+\newcommand{\inter}{\cap}                 % Opérateur d'intersection
+\newcommand{\union}{\cup}                 % Opérateur d'intersection
+\newcommand{\comp}{{\mbox{\footnotesize $c$}}} % Complément
+\newcommand{\moins}{\setminus}
+
+%%% Ensembles fréquemments utilisés %%%
+\newcommand{\ensembleVide}{\emptyset}  % L'ensemble vide
+\newcommand{\ensembleU}{{\mathbf{U}}}  % L'ensemble universel
+\newcommand{\ensembleB}{{\mathbb{B}}}  % L'ensemble des nombres booléens
+\newcommand{\ensembleN}{{\mathbb{N}}}  % L'ensemble des nombres naturels
+\newcommand{\ensembleZ}{{\mathbb{Z}}}  % L'ensemble des nombres relatifs
+\newcommand{\ensembleR}{\mathbb{R}}    % L'ensemble des nombres reels
+\newcommand{\ensembleQ}{\mathbb{Q}}    % L'ensemble des nombres rationnels
+
+
+%%% Démonstrations %%%
+\newcommand{\cqfd}{\blanc{.}\\[-2mm]\mbox{}\hfill {\bf C.Q.F.D.}\\} % C.Q.F.D
+\newcommand{\EQUIVALENT}[1]{ \quad \left\langle \mbox{ \it #1 } \right\rangle }
+\newcommand{\EXPLICATION}[1]{ \blanc{.}\hfill $\left\langle \mbox{ \small\it #1 } \right\rangle$ }
+
+%%% Divers %%%
+\newcommand{\eqdef}{\overset{{\mbox{\rm\tiny def}}}{=}} % Symbole de définition
+\newcounter{exercice}\newcommand{\exercice}{\bigskip \addtocounter{exercice}{1}\noindent \textbf{Exercice \theexercice}\\}
+
+\begin{document}
+
+\hfill
+ {\large MAT-1919:  Hiver 2022}\\
+\begin{center}
+{\LARGE \textbf{DEVOIR 1 - Gabarit \LaTeX}}\\[2mm]
+
+\end{center}
+
+\bigskip
+
+
+\emph{
+\noindent
+\textbf{Toutes les consignes suivantes seront considérées dans la note. }
+\begin{itemize}
+\item[$\bullet$] Enregistrez votre équipe (de 1 à 3 étudiants) avant la date limite de création d'une équipe, \textbf{dans tous les cas}.
+\item[$\bullet$]  Remise :  {\rouge{\textbf{un} fichier pdf \textbf{par exercice} (un seul)}, chacun étant  identifié par son numéro comme \bleu{dernier} caractère} (par exemple: \emph{1.pdf, no2.pdf, mat1919dev1no5.pdf}). Ces fichiers peuvent être dans un zip ou non. Nous utilisons un programme pour gérer les fichiers. Si plus d'un fichier termine par 3, ou aucun, ça crée problème.
+\item[$\bullet$]  Le travail peut être fait à la main ou à l'aide d'un logiciel informatique. Soignez la \textbf{lisibilité}. Les photos sont souvent de piètre qualité. Des logiciels de numérisation pour téléphone font mieux.
+\item[$\bullet$] Soignez l'\textbf{orthographe} et la \textbf{qualité de la langue}. La capacité de communiquer clairement son raisonnement est un atout en science.
+\item[$\bullet$] \textbf{Aucun retard toléré} (sauf circonstance exceptionnelle!)
+\end{itemize}
+}
+
+\vfill\vfill
+\bleu{Note: Il n'est pas nécessaire de remettre cette première page avec votre devoir.}
+\vfill
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\exercice
+Soit $p$, $q$ et $r$ des variables booléennes. Considérez l'expression suivante:
+$(p\implique q) \implique \non (r\ou q)\,. $
+Est-ce que:
+\begin{enumerate}[a)]
+\item L'expression est satisfiable?
+\item L'expression est insatisfiable?
+\item L'expression est toujours vraie, peu importe les valeurs de $p$, $q$ et $r$?
+\item L'expression est toujours fausse, peu importe les valeurs de $p$, $q$ et $r$?
+\end{enumerate}
+ Justifiez chacune de vos réponses en donnant  des affectations de valeurs qui témoignent de vos affirmations, si cela est suffisant. Si ce n'est pas suffisant, donnez la table de vérité de l'expression et justifiez. 
+
+
+\paragraph{Réponse:}~\\
+
+\begin{enumerate}[a)]
+\item \noindent Démontrons que l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~est satisfiable par une table de vérité.\\
+
+\noindent Soit $p$, $q$ et $r$ des expressions booléennes\\
+
+\begin{center}
+\begin{tabular}{c c c|c|cc| c}
+	$p$ & $q$ & $r$ & $p ~\rouge{\implique} ~q$ & $\rouge{\neg}$ & $(r \ou q)$ & $(p \implique q) ~\rouge{\implique} ~\neg (r \ou q)$ \\ \hline
+	\V & \V & \V & \rouge{\V} & \rouge{\F} & \V & \rouge{\F}\\
+	\V & \V & \F & \rouge{\V} & \rouge{\F} & \V & \rouge{\F}\\
+	\V & \F & \V & \rouge{\F} & \rouge{\F} & \V & \rouge{\V}\\
+	\V & \F & \F & \rouge{\F} & \rouge{\V} & \F & \rouge{\V}\\
+	\F & \V & \V & \rouge{\V} & \rouge{\F} & \V & \rouge{\F}\\
+	\F & \V & \F & \rouge{\V} & \rouge{\F} & \V & \rouge{\F}\\
+	\F & \F & \V & \rouge{\V} & \rouge{\F} & \V & \rouge{\F}\\
+	\F & \F & \F & \rouge{\V} & \rouge{\V} & \F & \rouge{\V}\\
+\end{tabular}
+\end{center}
+%inserer table verite ici
+
+\noindent Pour toutes les combinaisons de valeurs de vérité possibles attribuables aux expressions $p$, $q$ et $r$, l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~est satisfiable puisqu'il y a au moins une combinaisons de valeurs de vérité qui donne un résultat qui est vrai. Par exemple, lorsque $[p:=F]$, $[q:=F]$ et $[r:=F]$, l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~est vraie.
+
+\cqfd
+
+\item \noindent Tel que démontrée en a), l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~est satisfiable, elle ne peut donc pas être insatisfiable. Pour que l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~soit insatisfiable, il faut qu'aucune des combinaisons de valeurs de vérité soit vraie. Cependant, lorsque $[p:=F]$, $[q:=F]$ et $[r:=F]$, l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~est vraie.\\
+
+\item \noindent Non, l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~n'est pas toujours vraie puisque certaines combinaisons de valeurs de vérité pour $p$, $q$ et $r$ donnent un résultat qui est faux. Par exemple, lorsque $[p:=V]$, $[q:=V]$ et $[r:=V]$, l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~est fausse. Un autre exemple où ce que l'expression est fausse est lorsque $[p:=V]$, $[q:=V]$ et $[r:=F]$.\\
+
+\item \noindent Tel que démontrée en a), l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~est satisfiable, elle ne peut donc pas être toujours fausse puisqu'au moins une combinaison de valeurs de vérité est vraie. En effet, lorsque $[p:=F]$, $[q:=F]$ et $[r:=F]$, l'expression \guillemotleft ~$(p \implique q) \implique \neg (r \ou q)$ \guillemotright ~est vraie.
+\end{enumerate}
+% Écrivez votre réponse ici!
+
+
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\exercice 
+Soit $\heartsuit$, $\diamondsuit$, $\spadesuit$ des expressions booléennes.%\footnote{Notez que nous utilisons ici des pictogrammes différents de nos conventions habituelles (lettres $p$, $q$, $r$) pour représenter les variables booléennes, mais que cela ne fait aucune différence d'un point de vue mathématique.}
+ Démontrez l'expression suivante à l'aide d'une démonstration par cas (c'est-à-dire à l'aide d'une table de vérité):
+
+$$ (\,(\heartsuit \et \diamondsuit \implique \spadesuit) \et (\heartsuit \et \non \diamondsuit \implique \spadesuit)\,) \ \ssi \ \heartsuit \implique \spadesuit\,.$$ 
+
+\paragraph{Réponse:}~\\
+
+% Écrivez votre réponse ici!
+
+\newpage
+
+\exercice Refaites la démonstration de l'exercice précédent, mais en utilisant cette fois-ci une démonstration par succession d'équivalences.
+
+
+\paragraph{Réponse:}~\\
+
+
+% Écrivez votre réponse ici!
+
+
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\exercice 
+Soit $A$, $B$ et $C$ des ensembles. À l'aide de diagrammes de Venn, démontrez la propriété suivante:
+
+$$ \big((A \inter B)^\comp \union C\big) \inter \big((A\inter B^\comp)^\comp \union C\big) = A^\comp \union C\,.  $$
+
+
+\paragraph{Réponse:}~\\
+
+\def\acircle{(0,0) circle (0.75cm)}
+\def\bcircle{(0:1cm) circle (0.75cm)}
+\def\ccircle{(2cm:1cm) circle (0.75cm)}
+\def\rectangle{(2.3,2.1) rectangle (-1.3,-1.3)}
+
+\colorlet{circle edge}{blue!50}
+\colorlet{circle area}{blue!20}
+\colorlet{circle area2}{white!100}
+\colorlet{rectangle area}{blue!20}
+\colorlet{rectangle area2}{white!100}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+    unfilled/.style={fill=circle area2, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick}}
+\tikzset{filled/.style={fill=rectangle area, draw=circle edge, thick},
+    unfilled/.style={fill=rectangle area2, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick}}
+
+
+\noindent Démontrons l'expression $ \big((A \inter B)^\comp \union C\big) \inter \big((A\inter B^\comp)^\comp \union C\big) = A^\comp \union C\,  $ à l'aide de diagrammes de Venn.\\
+
+\noindent Soit $A$, $B$ et $C$ trois ensembles. Considérons la représentation suivante:\\
+
+%\setlength{\parskip}{5mm}
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
+
+\noindent Bâtissons d'abord l'ensemble \guillemotleft ~$A \inter B$ \guillemotright :\\
+
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \acircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$A$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad \inter$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \bcircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$B$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad =$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \clip \acircle;
+        \fill[filled] \bcircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$A \inter B$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
+
+\noindent Bâtissons ensuite l'ensemble \guillemotleft $(A \inter B)^\comp$ \guillemotright
+
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \clip \acircle;
+        \fill[filled] \bcircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$A \inter B$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad =$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \clip \bcircle;
+        \fill[unfilled] \acircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$(A \inter B)^\comp$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
+\newpage
+
+\noindent Bâtissons ensuite l'ensemble \guillemotleft ~$(A \inter B)^\comp \union C$ \guillemotright
+
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \clip \bcircle;
+        \fill[unfilled] \acircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$(A \inter B)^\comp$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad \union$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \ccircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$C$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad =$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \clip \bcircle;
+        \fill[unfilled] \acircle;
+        \fill[filled] \ccircle;
+    \end{scope}
+
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$((A \inter B)^\comp \union C)$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
+
+\noindent Bâtissons ensuite l'ensemble \guillemotleft ~$A \inter B^\comp$ \guillemotright
+
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \acircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$A$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad \inter$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \fill[unfilled] \bcircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$B^\comp$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad =$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \acircle;
+        \fill[unfilled] \bcircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$A \inter B^\comp$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
+
+\noindent Bâtissons ensuite l'ensemble \guillemotleft ~$(A \inter B^\comp)^\comp$ \guillemotright
+
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \acircle;
+        \fill[unfilled] \bcircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$A \inter B^\comp$};
+
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad =$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+    	\fill[filled] \rectangle;
+        \fill[unfilled] \acircle;
+        \fill[filled] \bcircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$(A \inter B^\comp)^\comp$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
+
+\noindent Bâtissons ensuite l'ensemble \guillemotleft ~$(A \inter B^\comp)^\comp \union C$ \guillemotright
+
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \fill[unfilled] \acircle;
+        \fill[filled] \bcircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$(A \inter B^\comp)^\comp$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad \union$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \ccircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$C$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad =$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \fill[unfilled] \acircle;
+        \fill[filled] \bcircle;
+        \fill[filled] \ccircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$(A \inter B^\comp)^\comp \union C$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
+\newpage
+
+\noindent Bâtissons ensuite l'ensemble \guillemotleft ~$(A \inter B)^\comp \union C) \inter ((A \inter B^\comp)^\comp \union C$ \guillemotright
+
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \clip \bcircle;
+        \fill[unfilled] \acircle;
+        \fill[filled] \ccircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$(A \inter B)^\comp \union C$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad \inter$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \fill[unfilled] \acircle;
+        \fill[filled] \bcircle;
+        \fill[filled] \ccircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$(A \inter B^\comp)^\comp \union C$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad =$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+    	\fill[filled] \rectangle;
+        \fill[unfilled] \acircle;
+        \fill[filled] \ccircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$(A \inter B)^\comp \union C) \inter ((A \inter B^\comp)^\comp \union C$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
+
+\noindent Bâtissons ensuite l'ensemble \guillemotleft ~$A^\comp \union C$ \guillemotright
+
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \fill[unfilled] \acircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$A^\comp$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad \union$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \ccircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$C$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad =$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \rectangle;
+        \fill[unfilled] \acircle;
+        \fill[filled] \ccircle;
+    \end{scope}
+    \draw[outline] \acircle node {$A$};
+    \draw[outline] \bcircle node {$B$};
+    \draw[outline] \ccircle node {$C$};
+    
+    \draw  (2.3,2.1) rectangle (-1.3,-1.3);
+
+	\node[xshift=-10pt,yshift=-10pt] at (current bounding box.north east) {$\ensembleU$};
+    \node[anchor=south] at (current bounding box.north) {$A^\comp \union C$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
+
+\noindent Les diagrammes de Venn obtenus montrent bien que les éléments appartenant à \guillemotleft ~$\big((A \inter B)^\comp \union C\big) \inter \big((A\inter B^\comp)^\comp \union C\big)$ \guillemotright ~sont les mêmes que les éléments appartenant à l'ensemble \guillemotleft ~$A^\comp \union C$ \guillemotright .\\
+\cqfd
+
+
+% Écrivez votre réponse ici!
+
+
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\exercice 
+Refaites la démonstration de l'exercice précédent, mais en utilisant cette fois-ci une démonstration par succession d'équivalences.
+
+
+\paragraph{Réponse:}~\\
+
+
+% Écrivez votre réponse ici!
+
+
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\exercice 
+Pour chacun des prédicats suivants, dites d'abord si l'énoncé est vrai ou s'il est faux. Ensuite, démontrez-le.
+
+\begin{enumerate}[a)]
+\item \quad
+$(\exists x\in \ensembleZ \mid x^2 \nondans \ensembleN  )\,, $
+\item \quad
+$(\forall x\in \ensembleZ\setminus \ensembleN\mid (x-1)^2\geq4  )\,, $
+\item \quad
+$(\forall x\in \ensembleR\mid |x|>3 \,\ou\, 2(\,|x|-2 )^2<5)\,.$
+\end{enumerate}
+Notez bien: Dans l'exercice ci-haut, $|x|$ correspond à la valeur absolue de la variable $x$.
+
+
+\paragraph{Réponse:}~\\
+
+
+% Écrivez votre réponse ici!
+
+
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\exercice
+On considère les trois ensembles suivants (peu importe la forme):
+\begin{itemize}
+\item L'ensemble VERTS des thés verts
+\item L'ensemble BIOS les thés biologiques.
+\item L'ensemble THÉS contenant  tous les thés. Notre ensemble universel.
+\end{itemize}
+On suppose que \emph{hedy} et  \emph{alan} sont des thés particuliers. 
+Pour chaque phrase suivante, écrivez une expression qui la représente, en utilisant les opérateurs ensemblistes seulement, si c’est possible.
+
+\noindent
+a) \emph{hedy} est un thé vert.\\[2mm]
+b) Les thés verts sont des thés.\\[2mm]
+c) Les thés verts ne sont pas tous biologiques.\\[2mm]
+ d) Il y a au moins 42 thés biologiques qui ne sont pas des thés verts.
+ \\[3mm]
+ Répondez aussi aux questions suivantes:\\[2mm]
+e) 
+Quelle interprétation possède l'expression \\\mbox{}\hfill$(\exists x \dans \mbox{VERTS} \mid (\forall y\in \mbox{BIOS} \mid  y=\emph{alan}\ou y\neq x \,) )\,.$\hfill\mbox{}
+ \\[3mm]
+f) Réécrivez les expressions suivantes en remplacent les points d'interrogation par le bon symbole parmi  $\in,\subseteq, \supseteq$. Si rien n’est possible, modifiez légèrement l'élément de gauche (le premier) afin de rendre un symbole possible.\\[-3mm]
+\begin{enumerate}[i.]
+\item $\emph{alan} ~~???~~ \mathcal{P}(\mbox{THÉS})$ 
+\item $\mbox{BIOS} ~~???~~ \mathcal{P}(\mbox{THÉS})$
+\item $\emph{hedy} ~~???~~ \mbox{THÉS} \cup \mbox{BIO}$
+\item $\mathcal{P}(\mbox{VERTS}) ~~???~~ \mathcal{P}(\mbox{THÉS})$
+
+\end{enumerate}
+
+
+\paragraph{Réponse:}~\\
+
+
+\begin{enumerate}[a)]
+ \item $\emph{hedy} \in \mbox{VERTS}$\\
+ \item $\mbox{VERTS} \subseteq \mbox{THÉS}$\\
+ \item $\mbox{BIOS} \subset \mbox{VERTS}$\\
+ \item $\mid \mbox{BIOS} \setminus \mbox{VERTS} \mid ~~\geq~ 42$\\
+ \item Pour tout thé biologique $y$, soit $y$ est \emph{alan} (un thé particulier) ou soit il existe un thé vert auquel $y$ est différent.\\
+ \item \begin{enumerate}[i)]
+    \item $\{\emph{alan}\} \in \mathcal{P}(\mbox{THÉS})$\\
+    \item $\mbox{BIOS} \in \mathcal{P}(\mbox{THÉS})$\\
+    \item $\emph{hedy} \in \mbox{THÉS} \union \mbox{BIO}$\\
+    \item $\mathcal{P}(\mbox{VERTS}) \subseteq \mathcal{P}(\mbox{THÉS})$
+\end{enumerate}
+\end{enumerate}
+% Écrivez votre réponse ici!
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}
+
+
+
+ % % % EXEMPLE DE TABLE DE VERITE % % % %
+\begin{center}
+\begin{tabular}{c c c c|c|c|c|c|c|c}
+$x_1$ & $x_2$ & $x_3$ & $x_4$ & $\overbrace{x_1\ou x_2}^{c_1}$ & $\overbrace{\non x_1 \ou x_3}^{c_2}$ & $\overbrace{x_1 \ou \non x_2}^{c_3}$ & $\overbrace{\non x_2 \ou x_3 }^{c_4}$ & $\overbrace{\non x_1 \ou \non x_3 }^{c_5}$ & $\overbrace{c_1 \et c_2 \et c_3 \et c_4 \et c_5}^{\psi_c}$ \\
+\hline
+\V & \V & \V & \V & \V & \V & \V & \V &\F & \rouge{\F} \\
+\V & \V & \V & \F & \V & \F & \V & \F &\V & \rouge{\F} \\
+\V & \V & \F & \V & \V & \V & \V & \V &\F & \rouge{\F} \\
+\V & \V & \F & \F & \V & \F & \V & \V &\V & \rouge{\F} \\
+\V & \F & \V & \V & \V & \V & \F & \V &\V & \rouge{\F} \\
+\V & \F & \V & \F & \V & \V & \F & \F &\V & \rouge{\F} \\
+\V & \F & \F & \V & \F & \V & \V & \V &\V & \rouge{\F} \\
+\V & \F & \F & \F & \F & \V & \V & \V &\V & \rouge{\F} \\
+\F & \V & \V & \V & \V & \V & \V & \V &\F & \rouge{\F} \\
+\F & \V & \V & \F & \V & \F & \V & \F &\V & \rouge{\F} \\
+\F & \V & \F & \V & \V & \V & \V & \V &\F & \rouge{\F} \\
+\F & \V & \F & \F & \V & \F & \V & \V &\V & \rouge{\F} \\
+\F & \F & \V & \V & \V & \V & \F & \V &\V & \rouge{\F} \\
+\F & \F & \V & \F & \V & \V & \F & \F &\V & \rouge{\F} \\
+\F & \F & \F & \V & \F & \V & \V & \V &\V & \rouge{\F} \\
+\F & \F & \F & \F & \F & \V & \V & \V &\V & \rouge{\F}
+\end{tabular}
+\end{center}
+
+
+-------------------------- Exemple d'écritures de diagramme de Venn  ---------------
+
+% Definition of circles
+\def\scircle{(0,0) circle (0.75cm)}
+\def\tcircle{(0:1cm) circle (0.75cm)}
+\def\vcircle{(2cm:1cm) circle (0.75cm)}
+
+\colorlet{circle edge}{blue!50}
+\colorlet{circle area}{blue!20}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick}}
+
+%\setlength{\parskip}{5mm}
+\begin{center}
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \scircle;
+    \end{scope}
+    \draw[outline] \scircle node {$S$};
+    \draw[outline] \tcircle node {$T$};
+    \draw[outline] \vcircle node {$V$};
+    
+    \draw  ([xshift=-15pt,yshift=15pt]current bounding box.north west) 
+      rectangle ([xshift=15pt,yshift=-15pt]current bounding box.south east);
+
+	\node[xshift=10pt,yshift=10pt] at (current bounding box.south west) {$\mathbf{U}$};
+    \node[anchor=south] at (current bounding box.north) {$S$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad \cap$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+        \fill[filled] \tcircle;
+        \fill[filled] \vcircle;
+    \end{scope}
+    \draw[outline] \scircle node {$S$};
+    \draw[outline] \tcircle node {$T$};
+    \draw[outline] \vcircle node {$V$};
+    
+    \draw  ([xshift=-15pt,yshift=15pt]current bounding box.north west) 
+      rectangle ([xshift=15pt,yshift=-15pt]current bounding box.south east);
+
+	\node[xshift=10pt,yshift=10pt] at (current bounding box.south west) {$\mathbf{U}$};
+    \node[anchor=south] at (current bounding box.north) {$T \cup V$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}{.1\textwidth}
+$\quad\quad =$
+\end{minipage}%
+\begin{minipage}{.2\textwidth}
+\begin{tikzpicture}
+    \begin{scope}
+    	\clip \scircle;
+        \fill[filled] \tcircle;
+        \fill[filled] \vcircle;
+    \end{scope}
+    \draw[outline] \scircle node {$S$};
+    \draw[outline] \tcircle node {$T$};
+    \draw[outline] \vcircle node {$V$};
+    
+    \draw  ([xshift=-15pt,yshift=15pt]current bounding box.north west) 
+      rectangle ([xshift=15pt,yshift=-15pt]current bounding box.south east);
+
+	\node[xshift=10pt,yshift=10pt] at (current bounding box.south west) {$\mathbf{U}$};
+    \node[anchor=south] at (current bounding box.north) {$S \cap (T \cup V)$};
+    
+\end{tikzpicture}
+\end{minipage}%
+\end{center}
